@@ -12,7 +12,7 @@ Why SICP?
 "SICP" is not just a book; it's a timeless masterpiece that has shaped the way countless programmers think about computation and programming. Through its pages, you will explore fundamental concepts in computer science and gain a deep understanding of how to approach complex problems with elegant and efficient solutions. Whether you are a beginner or an experienced programmer, SICP offers valuable insights that can benefit everyone.
 
 What to Expect
-In this repository, you will find:
+In this repository:
 
 Code Solutions: I will provide code solutions to the exercises presented in SICP. These solutions will be crafted to demonstrate the principles and techniques covered in the book, and try to convey my thought process behind them, by no means it will anywhere near perfect, please pardon me for eventual mistakes i'll make and feel free to send me tips.
 
