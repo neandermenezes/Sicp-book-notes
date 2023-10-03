@@ -26,6 +26,6 @@ My sources are the following:
 - Series of lectures by Brian Harvey of Berkeley: https://archive.org/details/ucberkeley-webcast-PL3E89002AA9B9879E?sort=title
 
 Let's Connect
-If you have questions, suggestions, or just want to connect with fellow SICP enthusiasts, please don't hesitate to reach out. You can contact me via email (neander2801@gmail.com) or connect with me on LinkedIn (linked on my profile).
+If you have questions, suggestions, or just want to connect with fellow SICP enthusiasts, please don't hesitate to reach out. You can contact me via email (neander2801@gmail.com) or connect with me on ([LinkedIn] https://www.linkedin.com/in/neandermenezes/) 
 
 Happy coding! 🚀
