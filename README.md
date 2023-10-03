@@ -20,6 +20,11 @@ Explanatory Notes: Each code solution will be accompanied by detailed explanatio
 
 Additional Resources: Throughout my SICP journey, I will also share useful resources, links, and supplementary materials that can enhance your understanding of the topics discussed in the book.
 
+My sources are the following:
+- Book available freely online: https://sarabander.github.io/sicp/html/index.xhtml
+- Series of lectures by the writers of the book: https://ocw.mit.edu/courses/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video_galleries/video-lectures/
+- Series of lectures by Brian Harvey of Berkeley: https://archive.org/details/ucberkeley-webcast-PL3E89002AA9B9879E?sort=title
+
 Let's Connect
 If you have questions, suggestions, or just want to connect with fellow SICP enthusiasts, please don't hesitate to reach out. You can contact me via email (neander2801@gmail.com) or connect with me on LinkedIn (linked on my profile).
 
