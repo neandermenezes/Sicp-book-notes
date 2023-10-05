@@ -48,6 +48,8 @@
       0
       (+ (term a) (sum term (next a) next b))))
 
+(provide sum)
+
 (define (inc n) (+ n 1))
 
 (define (sum-cubes a b)

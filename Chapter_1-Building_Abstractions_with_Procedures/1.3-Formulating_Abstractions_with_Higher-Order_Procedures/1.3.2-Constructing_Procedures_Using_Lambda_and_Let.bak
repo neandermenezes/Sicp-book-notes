@@ -27,15 +27,3 @@
 (define (f-let x y)
   (let ( (a (+ 1 (* x y))) (b (- 1 y)) )
     (+ (* x (square a)) (* y b) (* a b) ) ))
-
-
-;;EXERCISES
-;1.34
-;what would happen if we would call (function function)?
-;not sure of the answer, but i suppose an infinite recursive stack would be generated
-;and it appears that DrRacket stops a function of being called with itself
-
-;after researching it seems that this is not a procedure, but a symbol, you can't use a symbol as argument
-(define (function g) (g 2))
-(trace function)
-;(function function)

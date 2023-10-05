@@ -2,8 +2,30 @@
 
 (define (cube n) (* n n n))
 (define (square n) (* n n))
-(require "/1.2-Procedures_and_the_Processes_They_Generate/chapter1-2.rkt")
 
+(define (next n)
+  (if (= n 2)
+      3
+      (+ n 2)))
+
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n)
+         n)
+        ((divides? test-divisor n)
+         test-divisor)
+        (else (find-divisor n (next test-divisor)))))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+(define (prime? n)
+  (= n (smallest-divisor n)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define (sum-integers-func a b)
   (if (> a b)
       0
@@ -145,13 +167,30 @@
 (accumulate-iterative * 1 identity 1 inc 5); 120
       
 ;1.33
+;in order to add a filter on which numbers to accumulate we simply nest an if condition that tests if the value
+;attends a predicate.
 (define (filtered-accumulate combiner null-value term a next b filter)
   (if (> a b)
       null-value
       (if (filter a)
-          null-value
-          combiner (term a)
-                (filtered-accumulate combiner null-value term (next a) next b filter))))
+          (combiner (term a)
+                (filtered-accumulate combiner null-value term (next a) next b filter))
+          (filtered-accumulate combiner null-value term (next a) next b filter)
+          )))
+
+;here we add the prime numbers filter to accumulate the square of those that are prime
+(filtered-accumulate + 0 square 1 inc 5 prime?); 39
+
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+
+;product of all primes where GCD(i, n) = 1
+(define (product-of-relative-prime n)
+  (define (gcd1 i)
+    (= 1 (gcd i n)))
+  (filtered-accumulate * 1 identity 1 inc n gcd1))
 
 
 
