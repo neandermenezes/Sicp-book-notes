@@ -1,0 +1,1 @@
+("8.10" ta6nt ("9b55953d9101af2ce53c6f2d8c93570d4b7fd480" . "08c746e9676d83191a9ab440ef958614c1837aac") (collects #"drracket" #"private" #"drracket-errortrace-key.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"simply-scheme" #"lang" #"reader.rkt") (collects #"simply-scheme" #"main.rkt"))

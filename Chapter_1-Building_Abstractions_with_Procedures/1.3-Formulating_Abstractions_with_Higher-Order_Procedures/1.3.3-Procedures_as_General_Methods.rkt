@@ -34,6 +34,9 @@
 
 
 ;;Finding fixed points of functions
+; a fixed point is a place which has the property where you put in a value and you get the same value out
+; you can find a fixed point by iterating a function, f(f(f(x))), given a first guess, the value
+; will eventually be found
 (define tolerance 0.00001)
 
 (define (fixed-point f first-guess)
@@ -47,12 +50,13 @@
           (try next))))
   (try first-guess))
 
-;;fixed point of the function y = sin y + cos y
+;fixed point of the function y = sin y + cos y, given a 1.0 first guess will reliably give out
+;a fixed point of the function: 1.2587315962971173
 (fixed-point
  (lambda (y) (+ (sin y) (cos y)))
  1.0)
 
-;;square root y2 = x, y = x/y
+;;square root y2 = x, y = x/y returns a loop, we fix that loop by applying an averaging of x + f(x)
 (define (sqrt x)
   (fixed-point 
    (lambda (y) (average y (/ x y)))
@@ -67,4 +71,6 @@
 ; by means of the fixed-point procedure.
 (fixed-point
  (lambda (x) (+ 1 (/ 1 x)))
- 1.6180)
+ 1.0)
+;simply input fixed-point with the transformation and an arbitrary first guess,
+;the result will be the golden ratio

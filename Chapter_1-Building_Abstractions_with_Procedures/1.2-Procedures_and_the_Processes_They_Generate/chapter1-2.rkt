@@ -161,6 +161,7 @@
 (define (prime? n)
   (= n (smallest-divisor n)))
 
+(provide prime?)
 ;;fermat prime theorem
 
 ;; is 5 prime?, pick 3 for testing
