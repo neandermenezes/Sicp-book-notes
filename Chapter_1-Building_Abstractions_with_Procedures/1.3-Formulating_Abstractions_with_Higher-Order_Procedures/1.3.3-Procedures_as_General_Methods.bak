@@ -92,43 +92,29 @@
 
 
 ;;1.37
-;;continual fractal formula of the golden ratio, the higher k is, the more accurate the result will be.
-(define (cont-frac-iter n d k)
-  (define (iter i result)
-    (if (= k i)
-        result
-        (iter (+ i 1) (/ (n i) (+ (d i) result)))))
-  (iter 1 0))
+;(define (cont-frac-iter n d k)
+ ; (define (iter i result)
+  ;  (if (= k i)
+   ;     result
+    ;    (iter (+ i 1) (/ (n i) (+ (n i) (d i))))))
+  ;(iter 1 0))
 
 (define (cont-frac-recursive n d k)
   (define (recur i)
     (if (= k i)
         (/ (n i) (d i))
         (/ (n i) (+ (d i) (recur (+ 1 i))))))
+  (trace recur)
   (recur 1))
 
+(cont-frac-recursive (lambda (i) 1.0) (lambda (i) 1.0) 5)
 
-;(cont-frac-recursive (lambda (i) 1.0) (lambda (i) 1.0) 50)
-;(cont-frac-iter (lambda (i) 1.0) (lambda (i) 1.0) 50)
+(cont-frac-recursive
+ (lambda (i) 1.0)
+ (lambda (i)
+   (if (or (= i 2) ())
+ 10)
 
-;;1.38
-
-
-;;1.39
-;;We define a helper procedure with two arguments, i keeps count of the iteration, d keeps count of the Dx in the formula
-;;if i = 1, x is not squared, else x is squared, we repeat the loop until number of wanted iterations is reached
-(define (tan-cf x k)
-  (define (recur i d)
-    (if (= k i)
-        (/ (square x) d)
-        (if (= i 1)
-            (/ x (- d (recur (+ i 1) (+ d 2))))
-            (/ (square x) (- d (recur (+ i 1) (+ d 2)))))))
-  (recur 1 1))
-
-(define degrees-to-radians (* (/ 3.14 180.0)))
-
-(* 1.0 (tan-cf 1 8));1.557407724654856
 
 
 
