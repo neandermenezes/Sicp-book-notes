@@ -44,8 +44,6 @@
     (< (abs (- v1 v2))
        tolerance))
   (define (try guess)
-    (newline)
-    (display guess)
     (let ((next (f guess)))
       (if (close-enough? guess next)
           next

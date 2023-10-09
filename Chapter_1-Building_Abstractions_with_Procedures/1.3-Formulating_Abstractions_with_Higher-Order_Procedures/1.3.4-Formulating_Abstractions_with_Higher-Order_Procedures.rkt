@@ -3,6 +3,11 @@
 (define (average a b) (/ (+ a b) 2))
 (define (square x) (* x x))
 (define (cube x) (* x x x))
+(define (inc x) (+ x 1))
+(define (expt b n)
+  (if (= n 0)
+      1
+      (* b (expt b (- n 1)))))
 
 (require "./1.3.3-Procedures_as_General_Methods.rkt")
 
@@ -43,6 +48,8 @@
 ;to compute a derivative like x³ (3x²), we use Dg(x) = [g(x + dx) - g(x)] / dx
 
 ;like average-damp, deriv returns the derivative function of g
+(define dx 0.0001)
+
 (define (deriv g)
   (lambda (x) (/ (- (g (+ x dx)) (g x)) dx)))
 
@@ -84,7 +91,6 @@
    average-damp
    1.0))
 
-;this one
 (define (sqrt-newton-transform x)
   (fixed-point-of-transform
    (lambda (y) (- (square y) x))
@@ -92,9 +98,84 @@
    1.0))
 
 
+;;EXERCISES
+;;1.40
+;approximate zeros of the cubic function x³ + ax² + bx + c
+(define (cubic a b c)
+  (newtons-method
+   (lambda (x)
+     (+ (cube x) (* (square x) a) (* x b) c))
+   1.0))
 
 
+;;1.41
+;;Procedure that receives a procedure and returns it applied twice
+(define (double f)
+  (lambda (x) (f (f x))))
 
+;(((double (double double)) inc) 5) = 21
+
+
+;;1.42
+;;composing functions
+(define (compose f g)
+  (lambda (x) (f(g x))))
+
+;results in 49, first increments to 7 and them squares 7
+((compose square inc) 6) 
+
+
+;;1.43
+(define (repeated f times)
+  (define (iter i result)
+    (if (= i times)
+        result
+        (iter (+ i 1) (compose f result))))
+  (iter 1 f))
+
+;;((repeated square 2) 5) = 625
+
+
+;;1.44
+;;repeating the smoothing operation, works with signal waves
+(define (smooth f dx)
+  (lambda (x) (* 1.0 (/ (+ (f x) (f (- x dx)) (f (+ x dx))) 3))))
+               
+(define (repeated-smooth f dx n)
+  (repeated (smooth f dx) n))
+
+((repeated-smooth sin 0.7 2) (/ 3.14 2))
+
+
+;;1.45
+(newline)
+
+;;this was an interesting one: the amount of average-damps needed is equal to the log2(y)
+;;we call "repeated" procedure to apply the amount of needed dampings
+;;for calculation of the eight root of 16, for example, we need 3 damps
+;;and the fixed point of x/y^7 (achieved by using an expt procedure)
+(define (xroots x y)
+  (define xroot-expt (- y 1))
+  (fixed-point
+   (repeated (average-damp (lambda (y) (/ x (expt y xroot-expt)))) (round (/ (log y) (log 2))))
+  1.0))
+
+(xroots 16 8)
+
+;;4th root = 2 damps
+;;8th root = 3 damps
+;;16th root = 4 damps
+;;damps = log2(y)
+
+
+;;1.46
+;(define (iterative-improve good-enough? improve-guess)
+  ;(lambda (guess) ()
+
+
+    
+;(define (sqrt-iterative-improve x)
+  ;(iterative-improve
 
 
 
