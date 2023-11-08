@@ -1,0 +1,95 @@
+#lang simply-scheme
+(define (make-interval a b) (cons a b))
+(define (lower-bound x) (car x))
+(define (upper-bound x) (cdr x))
+
+;;2.1.4 - Interval Arithmetic
+(define (add-interval x y)
+  (make-interval (+ (lower-bound x)
+                    (lower-bound y))
+                 (+ (upper-bound x)
+                    (upper-bound y))))
+
+(define (mul-interval x y)
+  (let ((p1 (* (lower-bound x) 
+               (lower-bound y)))
+        (p2 (* (lower-bound x) 
+               (upper-bound y)))
+        (p3 (* (upper-bound x) 
+               (lower-bound y)))
+        (p4 (* (upper-bound x) 
+               (upper-bound y))))
+    (make-interval (min p1 p2 p3 p4)
+                   (max p1 p2 p3 p4))))
+
+;;2.10 - division by 0
+(define (div-interval x y)
+  (if (= (- (upper-bound y) (lower-bound y)) 0)
+      (error "can't divide by 0")
+  (mul-interval x 
+                (make-interval 
+                 (/ 1.0 (upper-bound y)) 
+                 (/ 1.0 (lower-bound y))))))
+
+(div-interval (make-interval 9 11) (make-interval 18 22))
+;;2.7 - define lower and upper bound procedures 
+;;done on the top of the file
+
+;;2.8 - substraction of intervals
+;;example: (10, 20) => (9, 11) (18, 22)
+;;the lowest possible number is upper-bound x (11) and lower-bound y (18) = 7
+;;the highest is lower-bound x (9) and upper-bound y (22) = 13
+(define (sub-interval x y)
+  (make-interval (- (lower-bound x)
+                    (upper-bound y))
+                 (- (upper-bound x)
+                    (lower-bound y))))
+
+
+;;2.9 - width of intervals
+;;width = (average upper lower)
+;;width is the measure of the uncertainty of an interval, for 10 (9, 11) it is 2.
+;;to calculate the width of 2 intervals we can compute the difference of interval(a) + interval(b)
+;;for a sum of x: 10, y: 20 => w(x): (9, 11) => 2 w(y): (18, 22) => 4. w(x) + w(y) = 6. or (33 - 27) = 6
+;;for a sub of x: 10, y: 20 => w(x): (9, 11) => 2 w(y): (18, 22) => 4. w(x) + w(y) = 6. or (13 - 7) = 6
+(define (width-interval x y)
+  (let ((interval-a (- (upper-bound x) (lower-bound x)))
+        (interval-b (- (upper-bound y) (lower-bound y))))
+    (+ interval-a interval-b)))
+
+(width-interval (make-interval 9 11) (make-interval 18 22))
+
+
+;;2.11 - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
